@@ -18,7 +18,6 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, { useNewUrlParser: true, useU
 app.use('/api/signup', require('./routes/signup'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/user', authenticate, require('./routes/user'));
-// app.use('/api/update-user', authenticate, require('./routes/updateUser'));
 
 app.use('/api/refresh-token', require('./routes/refreshToken'));
 app.use('/api/signout', require('./routes/signout'));

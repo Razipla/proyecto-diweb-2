@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import Login from './routes/login.tsx';
 import Signup from './routes/signup.tsx';
 import Profile from "./routes/profile.tsx";
+import UpdateProfile from './routes/updateProfile.tsx';
 import './index.css';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SecureRoute from './routes/secureRoute.tsx';
@@ -20,6 +21,10 @@ const router = createBrowserRouter ([
     path: "/signup",
     element: <Signup/>,
   },  
+  {
+    path: "/update-profile",
+    element: <UpdateProfile/>,
+  },
   {
     path: "/",
     element: <SecureRoute/>,

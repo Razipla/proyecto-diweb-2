@@ -34,9 +34,8 @@ try {
     .status(200)
     .json(jsonResponse(200, { message: "Usuario creado satisfactoriamente"}));
 
-    console.log("fin")    
     } catch (error) {
-        console.error("<><><>", error);
+        console.erro(error);
     res.status(500).json(
         jsonResponse(500, {
             error: "Error creando usuario",
