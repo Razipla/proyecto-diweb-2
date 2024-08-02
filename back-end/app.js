@@ -36,6 +36,7 @@ app.use("/api/users", authenticate, require("./routes/users"));
 app.use("/api/refresh-token", require("./routes/refreshToken"));
 app.use("/api/signout", require("./routes/signout"));
 app.use("/api/todos", require("./routes/todos"));
+app.use("/api/room", require("./routes/room"))
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -52,7 +53,7 @@ app.listen(port, () => {
 });
 
 server.listen(5001, ()=>{
-    console.log("socket listening")
+    console.log("Web socket is listening on port 5001"); // TODO: make the port a constant.
 })
 
 io.on("connection", (socket) => {

@@ -4,7 +4,7 @@ import { useAuth } from "../auth/AuthProvider";
 import io, { Socket } from "socket.io-client";
 import { CHAT_WS_URL } from "../auth/constants";
 import "../App.css";
-import "../chat.css"
+import "../chat.css";
 
 interface IMessage {
   sender: string;
@@ -14,7 +14,7 @@ interface IMessage {
 
 export default function Chat() {
   let socket: Socket;
-  const { userId } = useParams<{ userId: string }>();
+  const { userId, roomId } = useParams<{ userId: string; roomId: string }>();
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const auth = useAuth();
@@ -22,11 +22,14 @@ export default function Chat() {
   // pedimos chat -> query existe un room? id: 1 y id: 2?
   // existe? retorna id : crea y luego retorna.
   // usuario 1, usuario 2, usuario..n, messages: Message[];
-  // 
+  //
 
   useEffect(() => {
-    socket = io(CHAT_WS_URL, {query: {room: 1}});
+    socket = io(CHAT_WS_URL, { query: { room: roomId } });
     socket.on("messageReceived", handleNewMessage);
+    return () => {
+      socket.disconnect();
+    };
   });
 
   useEffect(() => {}, [userId]);
@@ -66,7 +69,7 @@ export default function Chat() {
             <span className="sender chat-item">{`${msg.sender}:`}</span>
             <span className="content chat-item">{msg.content}</span>
             <span className="timestamp chat-item">
-              ----{ msg.timestamp.toString()}
+              ----{msg.timestamp.toString()}
             </span>
           </div>
         ))}

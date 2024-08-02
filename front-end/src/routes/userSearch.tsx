@@ -53,8 +53,38 @@ export default function UserSearch() {
     }
   };
 
-  const startChat = (userId: string) => {
-    navigate(`/chat/${userId}`);
+  const startChat = async (userId: string) => {
+    let roomId = 0;
+    try {
+      const response = await fetch(`${API_URL}/room?userIds=${userId}&userIds=${auth.getUser()?.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${auth.getAccessToken()}`,
+        },
+      });
+
+      if (response.ok) {
+        const json = await response.json();
+        console.log("200: ", json);
+        roomId = json._id; // swap it to actual return.
+      } else {
+        const json = await response.json();
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: json.message || "Error al buscar usuarios",
+        });
+      }
+    } catch (error) {
+      console.error("Error al buscar usuarios:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Error inesperado al buscar usuarios",
+      });
+    }
+    navigate(`/chat/${userId}/${roomId}`);
   };
 
   return (
