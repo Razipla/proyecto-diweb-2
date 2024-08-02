@@ -38,7 +38,10 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
               <Link to="/profile" className="nav-link">Profile</Link>
             </li>
             <li className="nav-item">
-              <Link to="/me" className="nav-link">{auth.getUser()?.username ?? "User"}</Link>
+              <Link to="/update-profile" className="nav-link">{auth.getUser()?.username ?? "User"}</Link>
+            </li>
+            <li className="nav-item">
+              <Link to="/chat" className="nav-link">Chat</Link>
             </li>
             <li className="nav-item">
               <a href="#" onClick={handleSignOut} className="nav-link">Sign Out</a>

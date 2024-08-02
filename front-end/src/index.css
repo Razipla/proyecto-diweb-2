@@ -12,7 +12,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.sala-header {
+  font-size: 1.5em;
+  color: #273c75;
+}
 
+.todo-item {
+  background-color: #fbc531;
+  color: #273c75;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 a {
   font-weight: 500;
   color: #646cff;

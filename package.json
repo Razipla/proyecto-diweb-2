@@ -1,5 +1,9 @@
 {
   "dependencies": {
+    "express-async-handler": "^1.2.0",
     "sweetalert2": "^11.12.3"
+  },
+  "devDependencies": {
+    "vite": "^5.3.5"
   }
 }
