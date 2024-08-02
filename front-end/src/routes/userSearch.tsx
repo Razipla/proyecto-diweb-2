@@ -23,18 +23,18 @@ export default function UserSearch() {
     }
 
     try {
-      const response = await fetch(`${API_URL}/search-users`, {
-        method: "POST",
+      const response = await fetch(`${API_URL}/users/${searchTerm.trim()}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
-        body: JSON.stringify({ searchTerm: searchTerm.trim() }),
       });
 
       if (response.ok) {
         const json = await response.json();
-        setUsers(json.users);
+        console.log("200: ", json);
+        setUsers(json);
       } else {
         const json = await response.json();
         Swal.fire({
@@ -70,10 +70,10 @@ export default function UserSearch() {
         <button type="submit">Buscar</button>
       </form>
       <div className="user-list">
-        {users.map((user: any) => (
-          <div key={user.id} className="user-item">
+        {users.map((user: any, index) => (
+          <div key={index} className="user-item">
             <span>{user.username}</span>
-            <button onClick={() => startChat(user.id)}>Chat</button>
+            <button onClick={() => startChat(user._id)}>Chat</button>
           </div>
         ))}
       </div>
